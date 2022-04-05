@@ -1,0 +1,65 @@
+# H2 Database
+#spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+#spring.datasource.driverClassName=org.h2.Driver
+#spring.datasource.username=sa
+#spring.datasource.password=password
+#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+#spring.h2.console.enabled=true
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL55Dialect
+
+# MS SQL Database
+#spring.datasource.url= jdbc:sqlserver://localhost;databaseName=bank
+#spring.datasource.username= sa
+#spring.datasource.password= pwd
+#spring.datasource.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+#spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.SQLServer2012Dialect
+#spring.jpa.hibernate.ddl-auto= update
+#spring.jpa.show-sql=true
+#spring.jpa.properties.hibernate.format_sql = true
+
+#spring.mvc.throw-exception-if-no-handler-found=true
+#spring.resources.add-mappings=false
+
+#spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+#spring.kafka.consumer.properties.spring.deserializer.value.delegate.class=org.springframework.kafka.support.serializer.JsonDeserializer
+
+server:
+  port: 7002
+  error:
+    include-stacktrace: never
+    
+spring:
+  kafka:
+    template:
+      default-topic: truist-account-credit
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      group-id: truist-group
+      
+    producer:
+      bootstrap-servers:
+        -   localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  datasource:
+    url: jdbc:sqlserver://localhost;databaseName=bank
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: pwd
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect 
+        format_sql: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      
+     
+
+
+

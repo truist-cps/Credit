@@ -1,58 +1,22 @@
 package com.domain.model;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-
+@Getter @Setter @ToString
+@RequiredArgsConstructor
 public class Model {
-	private long sourceAccountNumber;
-	private long destinationAccountNumber;
-    private long amount ;
-    
-    
-    
-    public Model() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-	public Model(long amount) {
-        this.amount = amount;
-    }
-
-
-
-	public long getDestinationAccountNumber() {
-		return destinationAccountNumber;
-	}
-
-	public void setDestinationAccountNumber(long destinationAccountNumber) {
-		this.destinationAccountNumber = destinationAccountNumber;
-	}
-
-	public long getSourceAccountNumber() {
-		return sourceAccountNumber;
-	}
-
-	public void setSourceAccountNumber(long sourceAccountNumber) {
-		this.sourceAccountNumber = sourceAccountNumber;
-	}
-
 	
-	public long getAmount() {
-		return amount;
+    public Model(Model transactionRequest) {
+    	super();
+		this.destinationAccountNumber = transactionRequest.getDestinationAccountNumber();
+		this.amount = transactionRequest.getAmount();
+		this.sourceAccountNumber = transactionRequest.getSourceAccountNumber();
 	}
-
-	public void setAmount(long amount) {
-		this.amount = amount;
-	}
-
-	@Override
-	public String toString() {
-		return "depositModel [destinationAccountNumber=" + destinationAccountNumber + ", amount=" + amount
-				+ ", sourceAccountNumber=" + sourceAccountNumber + "]";
-	}
-
-  
     
+    private long destinationAccountNumber;
+	private long amount ;
+    private long sourceAccountNumber;
 }

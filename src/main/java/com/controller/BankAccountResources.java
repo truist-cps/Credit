@@ -26,6 +26,8 @@ import com.service.CustomerService;
 import com.service.DepositService;
 import com.utils.NoSuchAccountException;
 import com.utils.ResponseModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -35,13 +37,16 @@ public class BankAccountResources {
 
   
     private final DepositService depositService;
+    private static final Logger logger = LoggerFactory.getLogger(BankAccountResources.class);
+
     @Autowired
     ObjectMapper objectMapper;
     
-    @KafkaListener(topics = {"truist-account-credit"})
+    @KafkaListener(topics = {"truist-account"})
     public ResponseEntity<ResponseModel> deposit(ConsumerRecord<Integer,String> consumerRecord) throws JsonMappingException, JsonProcessingException  {
     	
     	Model model=objectMapper.readValue(consumerRecord.value(),Model.class);
+    	logger.info(String.format("#### -> Message Consumed SuccessFully-> %s", model.toString()));
     	ResponseModel responseModel=new ResponseModel();
     	Credit credit;
 		try {
